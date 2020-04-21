@@ -1,5 +1,14 @@
 ---
 
+- name: Nomad Systemd Script
+  template:
+    src: "etc/systemd/system/nomad.service.j2"
+    dest: /etc/systemd/system/nomad.service
+    owner: root
+    group: root
+    mode: "0755"
+  when: ansible_service_mgr == "systemd"
+
 - name: Nomad Init Script
   template:
     src: "etc/init.d/nomad.{{ansible_os_family}}.j2"
@@ -7,6 +16,7 @@
     owner: root
     group: root
     mode: "0755"
+  when: ansible_service_mgr != "systemd"
 
 - name: Enable Nomad at boot
   service:
@@ -14,5 +24,8 @@
     enabled: yes
     state: "{{ (nomad_started) | ternary('started', 'stopped') }}"
   when: nomad_start_at_boot
+
+- pause:
+    minutes: 2
 
 # vi:ts=2:sw=2:et:ft=yaml
