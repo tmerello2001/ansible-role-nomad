@@ -12,9 +12,9 @@ KillSignal=SIGINT
 LimitNOFILE=infinity
 LimitNPROC=infinity
 Restart=on-failure
-RestartSec=10s
-StartLimitBurst=3
-StartLimitIntervalSec=10
+RestartSec={{nomad_service_file_restart_sec}}
+StartLimitBurst={{nomad_service_file_start_limit_burst}}
+StartLimitIntervalSec={{nomad_service_file_start_limit_interval_sec}}
 TasksMax=infinity
 
 [Install]
