@@ -54,6 +54,12 @@ nomad_started: true
 nomad_config_dir: /etc/nomad.d
 nomad_data_dir: /var/nomad
 
+# Vars to be rendered in nomad service file
+# (/etc/systemd/system/nomad.service)
+nomad_service_file_restart_sec: 10s
+nomad_service_file_start_limit_burst: 3
+nomad_service_file_start_limit_interval_sec: 10
+
 # Daemon options to be passed through nomad options file
 # (/etc/default/nomad or /etc/sysconfig/nomad)
 #

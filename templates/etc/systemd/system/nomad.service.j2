@@ -1,0 +1,21 @@
+[Unit]
+Description=Nomad
+Documentation=https://nomadproject.io/docs/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart={{nomad_bin}} agent -config {{nomad_config_dir}}
+KillMode=process
+KillSignal=SIGINT
+LimitNOFILE=infinity
+LimitNPROC=infinity
+Restart=on-failure
+RestartSec={{nomad_service_file_restart_sec}}
+StartLimitBurst={{nomad_service_file_start_limit_burst}}
+StartLimitIntervalSec={{nomad_service_file_start_limit_interval_sec}}
+TasksMax=infinity
+
+[Install]
+WantedBy=multi-user.target
