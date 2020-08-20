@@ -22,7 +22,7 @@
   service:
     name: nomad
     enabled: yes
-    state: "{{ (nomad_started) | ternary('started', 'stopped') }}"
+    state: "{{ (nomad_started|bool) | ternary('started', 'stopped') }}"
   when: nomad_start_at_boot
 
 # vi:ts=2:sw=2:et:ft=yaml
